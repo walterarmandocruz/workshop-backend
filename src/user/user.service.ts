@@ -5,37 +5,32 @@ import { User } from './entities/user.entity';
 
 @Injectable()
 export class UserService {
-  constructor(
-    @InjectRepository(User) private userRepository: Repository<User>,
-  ) {}
+    constructor(@InjectRepository(User) private userRepository: Repository<User>) { }
 
-  create(user: User) {
-    return this.userRepository.save(user);
-  }
-
-  findAll() {
-    return this.userRepository.find();
-  }
-
-  findOne(id: number) {
-    return this.userRepository.findOne(id);
-  }
-
-  async update(user: User) {
-    const userFound: User = await this.userRepository.findOne(user.id);
-
-    if (userFound) {
-      return this.userRepository.save(user);
-    } else {
-      throw new HttpException(
-        'El usuario a actualizar no existe',
-        HttpStatus.NOT_FOUND,
-      );
+    async create(user: User) {
+        return await this.userRepository.save(user);
     }
-  }
 
-  async remove(id: number) {
-    const user: User = await this.userRepository.findOne(id);
-    return await this.userRepository.remove(user);
-  }
+    async findAll() {
+        return await this.userRepository.find();
+    }
+
+    async findOne(id: number) {
+        return await this.userRepository.findOne(id);
+    }
+
+    async update(user: User) {
+        let userFound: User = await this.userRepository.findOne(user.id);
+
+        if (userFound) {
+            return this.userRepository.save(user);
+        } else {
+            throw new HttpException('El usuario a actualizar no existe', HttpStatus.NOT_FOUND);
+        }
+    }
+
+    async remove(id: number) {
+        let user: User = await this.userRepository.findOne(id);
+        return await this.userRepository.remove(user);
+    }
 }

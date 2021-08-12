@@ -5,21 +5,21 @@ import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 
 @Module({
-  imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'walter',
-      database: 'workshop',
-      autoLoadEntities: true,
-      synchronize: true,
-      logging: true,
-    }),
-    UserModule,
-  ],
-  controllers: [AppController],
-  providers: [AppService],
+    imports: [
+        TypeOrmModule.forRoot({
+            type: 'mysql',
+            host: 'localhost',
+            port: 3306,
+            username: 'root',
+            password: 'walter',
+            database: 'workshop',
+            autoLoadEntities: true,
+            synchronize: true,
+            logging: true
+        }),
+        UserModule
+    ],
+    controllers: [AppController],
+    providers: [AppService]
 })
-export class AppModule {}
+export class AppModule { }
