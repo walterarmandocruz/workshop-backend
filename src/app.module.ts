@@ -19,7 +19,9 @@ import { RoleModule } from './role/role.module';
             synchronize: true,
             logging: true
         }),
-        UserModule
+        UserModule,
+        AuthModule,
+        RoleModule
     ],
     controllers: [AppController],
     providers: [AppService]

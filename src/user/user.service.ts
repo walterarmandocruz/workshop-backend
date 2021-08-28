@@ -12,11 +12,11 @@ export class UserService {
     }
 
     async findAll() {
-        return await this.userRepository.find();
+        return await this.userRepository.find({relations: ['role']});
     }
 
     async findOne(id: number) {
-        return await this.userRepository.findOne(id);
+        return await this.userRepository.findOne(id, {relations: ['role']});
     }
 
     async update(user: User) {
@@ -33,4 +33,8 @@ export class UserService {
         let user: User = await this.userRepository.findOne(id);
         return await this.userRepository.remove(user);
     }
+
+    async findByUsername(username: string) {
+        return this.userRepository.findOne({username: username});
+      }
 }
